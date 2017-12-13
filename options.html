@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-hant">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>巴哈自動簽到</title>
+<style>
+body {
+	width: 366px;
+}
+.hint {
+	color: #9E9E9E;
+}
+footer {
+	border-top: 1px solid #d3d3d3;
+	margin-top: 14px;
+	padding-top: 10px;
+	text-align: center;
+	color: #999;
+}
+footer a {
+	text-decoration: none;
+}
+</style>
+</head>
+<body>
+<main>
+	<h2>定時開啟頁面簽到</h2>
+	<input type="checkbox" id="autoOpen" checked />
+	自動在
+	<input type="number" id="hour" min="0" max="23" value="0" /> 點
+	<input type="number" id="min" min="0" max="59" value="5" /> 分開啟巴哈簽到
+	<p class="hint">不勾就不會自動開啟頁面簽到，會等到你手動進入巴哈首頁才會自動簽到 [!! 記得巴哈要先保持登入狀態 !!]</p>
+</main>
+<footer>
+	By <a href="https://brownsugar.tw" target="_blank">Brownsugar</a> ‧ 同場加映：<a href="https://chrome.google.com/webstore/detail/mgkjobjoffjpblaahahoohdkibjlbdag" target="_blank">巴哈無痛擋廣告</a> | <a href="https://chrome.google.com/webstore/detail/bngfikljchleddkelnfgohdfcobkggin" target="_blank">LINE 貼圖打包</a>
+</footer>
+<script type="text/javascript" src="assets/js/options.js"></script>
+</body>
+</html>
