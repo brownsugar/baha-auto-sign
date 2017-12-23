@@ -18,12 +18,16 @@ var config = {
 	hour: 0,
 	min: 5,
 };
-var sync, lsKey = 'signV4';
+var sync, lsKey = 'signV41';
 
 getConfig();
 
 function syncStart() {
 	sync = setInterval(function() {
+		if(!config.autoOpen) {
+			clearInterval(sync);
+			return;
+		}
 		var now = new Date();
 		if(now.getHours() == config.hour && now.getMinutes() == config.min && now.getDate() != localStorage[lsKey]) {
 			open('https://www.gamer.com.tw/?utm_source=gamerAutoSign&utm_medium=popup');
@@ -57,9 +61,6 @@ function getConfig() {
 	});
 	if(config.autoOpen) {
 		syncStart();
-	}
-	else {
-		clearInterval(sync);
 	}
 }
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {

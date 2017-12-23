@@ -1,8 +1,8 @@
 {
 	"manifest_version": 2,
 	"name": "巴哈自動簽到",
-	"version": "0.4",
-	"description": "你沒有妹妹",
+	"version": "0.4.1",
+	"description": "當個簽到小達人",
 	"icons": {
 		"128": "assets/img/babi.png"
 	},
