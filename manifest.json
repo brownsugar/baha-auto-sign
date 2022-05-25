@@ -1,5 +1,5 @@
 {
-	"manifest_version": 2,
+	"manifest_version": 3,
 	"name": "巴哈自動簽到",
 	"version": "0.4.1",
 	"description": "當個簽到小達人",
@@ -9,16 +9,15 @@
 	"permissions": [ "background", "tabs", "storage" ],
 	"content_security_policy": "script-src 'self' https://*.google-analytics.com; object-src 'self'",
 	"options_ui": {
-		"chrome_style": true,
 		"page": "options.html#embed"
 	},
-	"browser_action": {
+	"action": {
 		"default_icon": "assets/img/babi.png",
 		"default_popup": "options.html#embed",
 		"default_title": "巴哈自動簽到設定"
 	},
 	"background": {
-		"scripts": [ "assets/js/background.js" ]
+		"service_worker": "assets/js/background.js"
 	},
 	"content_scripts": [{
 		"run_at": "document_end",
