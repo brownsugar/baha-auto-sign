@@ -1,7 +1,7 @@
 declare global {
   interface Window {
     Signin: {
-      auto: () => void
+      mobile: () => void
       signinWork: () => Promise<any>
       finishAd: (() => void) | undefined
       checkSigninStatus: () => Promise<{

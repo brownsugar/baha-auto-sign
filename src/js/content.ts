@@ -71,7 +71,7 @@ const inject = () => {
     }
   }
 
-  // Auto sign will not be triggered when current time is earlier than 00:05.
+  // Auto sign will not be triggered when current time is earlier than 00:06.
   // If it's not triggered in 5 seconds, do it manually.
   // eslint-disable-next-line @typescript-eslint/no-misused-promises
   const timer = setTimeout(async () => {
@@ -79,7 +79,7 @@ const inject = () => {
     if (status.data.signin === 1) {
       onSignComplete(status.data.finishedAd === 0)
     } else {
-      window.Signin.auto()
+      window.Signin.mobile()
     }
   }, 5000)
 }
