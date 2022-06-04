@@ -22,5 +22,7 @@ writeFileSync(manifestPath, JSON.stringify(manifest, null, 2))
 
 const zip = new Zip()
 zip.addLocalFolder('./dist', '')
-const zipName = `${packageJson.name as string}-v${version}`
-zip.writeZip(`./build/${zipName}.zip`)
+const zipName = `${packageJson.name as string}-v${version}.zip`
+zip.writeZip(`./build/${zipName}`)
+
+console.log('Successfully built extension package file:', zipName)
