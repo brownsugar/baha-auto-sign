@@ -8,11 +8,12 @@
 	},
 	"permissions": [ "alarms", "background", "storage" ],
 	"options_ui": {
-		"page": "options.html#embed"
+		"page": "options.html",
+		"open_in_tab": false
 	},
 	"action": {
 		"default_icon": "image/babi.png",
-		"default_popup": "options.html#embed",
+		"default_popup": "options.html",
 		"default_title": "巴哈自動簽到設定"
 	},
 	"background": {
