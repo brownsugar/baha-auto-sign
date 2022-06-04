@@ -1,29 +1,29 @@
 {
-	"manifest_version": 3,
-	"name": "巴哈自動簽到",
-	"version": "1.0.0",
-	"description": "當個簽到小達人",
-	"icons": {
-		"128": "image/babi.png"
-	},
-	"permissions": [ "alarms", "background", "storage" ],
-	"options_ui": {
-		"page": "options.html",
-		"open_in_tab": false
-	},
-	"action": {
-		"default_icon": "image/babi.png",
-		"default_popup": "options.html",
-		"default_title": "巴哈自動簽到設定"
-	},
-	"background": {
-		"service_worker": "js/background.js"
-	},
-	"content_scripts": [
-		{
-			"run_at": "document_end",
-			"matches": [ "https:\/\/*.gamer.com.tw/*" ],
-			"js": [ "js/content.js" ]
-		}
-	]
+  "manifest_version": 3,
+  "name": "巴哈自動簽到",
+  "version": "1.0.0",
+  "description": "當個簽到小達人",
+  "icons": {
+    "128": "image/babi.png"
+  },
+  "permissions": [ "alarms", "background", "storage" ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
+  "action": {
+    "default_icon": "image/babi.png",
+    "default_popup": "options.html",
+    "default_title": "巴哈自動簽到設定"
+  },
+  "background": {
+    "service_worker": "js/background.js"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [ "https:\/\/*.gamer.com.tw/*" ],
+      "js": [ "js/content.js" ]
+    }
+  ]
 }
