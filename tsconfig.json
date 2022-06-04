@@ -12,6 +12,7 @@
     ".eslintrc.js",
     "config/*.ts",
     "src/**/*.ts",
+    "scripts/*.ts",
     "types/*.ts"
   ]
 }

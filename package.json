@@ -4,7 +4,9 @@
   "description": "Daily sign in 94 EZ.",
   "scripts": {
     "dev": "webpack --env development --watch --config config/webpack.config.ts",
-    "build": "webpack --env production --config config/webpack.config.ts",
+    "build": "yarn build:ext && yarn build:zip",
+    "build:ext": "webpack --env production --config config/webpack.config.ts",
+    "build:zip": "ts-node scripts/buildZip.ts",
     "lint": "eslint src/**/* --ext .ts"
   },
   "repository": {
@@ -19,9 +21,11 @@
   "homepage": "https://github.com/brownsugar/baha-auto-sign#readme",
   "private": true,
   "devDependencies": {
+    "@types/adm-zip": "^0.5.0",
     "@types/chrome": "^0.0.188",
     "@typescript-eslint/eslint-plugin": "^5.26.0",
     "@typescript-eslint/parser": "^5.26.0",
+    "adm-zip": "^0.5.9",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.1",
     "eslint": "^8.16.0",
@@ -34,6 +38,7 @@
     "sass-loader": "^13.0.0",
     "ts-loader": "^9.3.0",
     "ts-node": "^10.8.0",
+    "type-fest": "^2.13.0",
     "typescript": "^4.7.2",
     "webpack": "^5.72.1",
     "webpack-cli": "^4.9.2",
