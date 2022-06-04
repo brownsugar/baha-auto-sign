@@ -2,6 +2,7 @@ import { resolve } from 'path'
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import * as CopyWebpackPlugin from 'copy-webpack-plugin'
 import * as WebpackRemoveEmptyScripts from 'webpack-remove-empty-scripts'
+import * as TerserWebpackPlugin from 'terser-webpack-plugin'
 import { SourceMapDevToolPlugin } from 'webpack'
 import type { Configuration } from 'webpack'
 
@@ -57,7 +58,18 @@ export default (production: boolean) => {
     }
   }
 
-  if (!production) {
+  if (production) {
+    config.optimization = {
+      minimize: true,
+      minimizer: [new TerserWebpackPlugin({
+        terserOptions: {
+          format: {
+            quote_style: 1 // AlwaysSingle
+          }
+        }
+      })]
+    }
+  } else {
     config.plugins?.push(
       new SourceMapDevToolPlugin({
         filename: '[file].map',
