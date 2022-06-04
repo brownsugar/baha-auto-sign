@@ -38,7 +38,7 @@ const ALARM_LAUNCH = 'launch'
 const createLaunchAlarm = async () => {
   const config = await getConfig()
 
-  if (!config.autoLaunch) {
+  if (!config.autoLaunch || config.launchTime === '') {
     return
   }
 
