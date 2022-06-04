@@ -1,50 +1,50 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<link rel="stylesheet" href="style/pure-min.css" />
-	<link rel="stylesheet" href="style/options.css" />
-	<title>巴哈自動簽到</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" href="style/pure-min.css" />
+  <link rel="stylesheet" href="style/options.css" />
+  <title>巴哈自動簽到</title>
 </head>
 <body>
-	<form class="pure-form">
-		<fieldset>
-			<legend>⏰ 定時簽到</legend>
-			<label for="auto-launch" class="pure-checkbox">
-				<input type="checkbox" id="auto-launch" checked /> 自動開啟瀏覽器簽到
-			</label>
-			<div class="hint">
-				記得先到瀏覽器「設定」>「進階」>「系統」中勾選「Google Chrome 關閉時繼續執行背景應用程式」此功能才會生效。
-			</div>
-			<div class="pure-g align-item-center">
-				<div class="pure-u-1-6">
-					<label for="launch-time" class="my-0">開啟時間</label>
-				</div>
-				<div>
-					<input type="time" id="launch-time" class="pure-input-rounded" value="00:05" />
-				</div>
-			</div>
-			<span class="pure-form-message">不建議設定剛好 0 點，避免產生時間差問題。</span>
+  <form class="pure-form">
+    <fieldset>
+      <legend>⏰ 定時簽到</legend>
+      <label for="auto-launch" class="pure-checkbox">
+        <input type="checkbox" id="auto-launch" checked /> 自動開啟瀏覽器簽到
+      </label>
+      <div class="hint">
+        記得先到瀏覽器「設定」>「進階」>「系統」中勾選「Google Chrome 關閉時繼續執行背景應用程式」此功能才會生效。
+      </div>
+      <div class="pure-g align-item-center">
+        <div class="pure-u-1-6">
+          <label for="launch-time" class="my-0">開啟時間</label>
+        </div>
+        <div>
+          <input type="time" id="launch-time" class="pure-input-rounded" value="00:05" />
+        </div>
+      </div>
+      <span class="pure-form-message">不建議設定剛好 0 點，避免產生時間差問題。</span>
     </fieldset>
-		<fieldset>
-			<legend>💰 雙倍巴幣</legend>
-			<label for="auto-double" class="pure-checkbox">
-				<input type="checkbox" id="auto-double" checked /> 啟用
-			</label>
-			<div class="hint">
-				簽到完成時，自動執行「領取雙倍巴幣」功能。
-			</div>
+    <fieldset>
+      <legend>💰 雙倍巴幣</legend>
+      <label for="auto-double" class="pure-checkbox">
+        <input type="checkbox" id="auto-double" checked /> 啟用
+      </label>
+      <div class="hint">
+        簽到完成時，自動執行「領取雙倍巴幣」功能。
+      </div>
     </fieldset>
-	</form>
-	<footer>
-		<div class="more-and-more">
-			更多擴充功能：<a href="https://brn.sg/LINEStickerPacker?utm_source=BahaAutoSign" target="_blank">LINE 貼圖打包</a>
-		</div>
-		<ul class="copyright">
-			<li>By <a href="https://brownsugar.tw" target="_blank">Brownsugar</a></li>
-			<li><a href="https://github.com/brownsugar/baha-auto-sign" target="_blank">Source code</a></li>
-		</ul>
-	</footer>
-	<script src="js/options.js"></script>
+  </form>
+  <footer>
+    <div class="more-and-more">
+      更多擴充功能：<a href="https://brn.sg/LINEStickerPacker?utm_source=BahaAutoSign" target="_blank">LINE 貼圖打包</a>
+    </div>
+    <ul class="copyright">
+      <li>By <a href="https://brownsugar.tw" target="_blank">Brownsugar</a></li>
+      <li><a href="https://github.com/brownsugar/baha-auto-sign" target="_blank">Source code</a></li>
+    </ul>
+  </footer>
+  <script src="js/options.js"></script>
 </body>
 </html>
