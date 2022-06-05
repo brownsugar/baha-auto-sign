@@ -1,6 +1,6 @@
 {
   "name": "baha-auto-sign",
-  "version": "1.0.0-rc.0",
+  "version": "1.0.0-rc.1",
   "description": "Daily sign in 94 EZ.",
   "scripts": {
     "dev": "webpack --env development --watch --config config/webpack.config.ts",
