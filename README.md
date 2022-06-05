@@ -19,6 +19,22 @@
 
 任何想法或新功能歡迎提交 Issue 或 Pull request。
 
+## 開發指令
+
+```bash
+# install dependencies
+$ yarn
+
+# serve with hot reload
+$ yarn dev
+
+# build for production and generate zip file
+$ yarn build
+
+# lint the TypeScript files with ESLint
+$ yarn lint
+```
+
 ## 授權條款
 
 MIT License
