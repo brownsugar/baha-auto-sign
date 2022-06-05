@@ -16,7 +16,7 @@ export const defConfig: IConfig = {
 }
 export const getConfig = async () => {
   const config = await getStorageData(defConfig)
-  migrateConfig(config)
+  await migrateConfig(config)
   return config
 }
 
