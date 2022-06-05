@@ -11,7 +11,7 @@ export interface IConfig {
 }
 export const defConfig: IConfig = {
   autoLaunch: true,
-  launchTime: '00:05',
+  launchTime: '00:06',
   autoDouble: true
 }
 export const getConfig = async () => {
