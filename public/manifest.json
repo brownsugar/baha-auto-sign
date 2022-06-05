@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "巴哈自動簽到",
   "version": "1.0.0",
-  "description": "當個簽到小達人",
+  "description": "Daily sign in 94 EZ.",
   "icons": {
     "128": "image/babi.png"
   },
