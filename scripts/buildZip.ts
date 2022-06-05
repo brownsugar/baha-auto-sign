@@ -17,7 +17,7 @@ if (!existsSync(manifestPath)) {
 }
 
 const manifest = JSON.parse(readFileSync(manifestPath, 'utf-8'))
-manifest.version = version
+manifest.version = version.split('-')[0] // Handle pre-released versions, e.g. 1.0.0-rc.0
 writeFileSync(manifestPath, JSON.stringify(manifest, null, 2))
 
 const zip = new Zip()
