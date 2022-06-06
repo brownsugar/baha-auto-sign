@@ -6,7 +6,7 @@
     "dev": "webpack --env development --watch --config config/webpack.config.ts",
     "build": "yarn build:ext && yarn build:zip",
     "build:ext": "webpack --env production --config config/webpack.config.ts",
-    "build:zip": "ts-node scripts/buildZip.ts",
+    "build:zip": "ts-node scripts/build-zip.ts",
     "lint": "eslint src/**/* --ext .ts",
     "postversion": "git push --tags && git push"
   },

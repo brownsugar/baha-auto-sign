@@ -1,6 +1,6 @@
 import { readFileSync, writeFileSync, existsSync } from 'fs'
 import * as Zip from 'adm-zip'
-import { PackageJson } from 'type-fest'
+import type { PackageJson } from 'type-fest'
 
 const packageJsonPath = './package.json'
 const packageJson: PackageJson = JSON.parse(readFileSync(packageJsonPath, 'utf-8'))
@@ -12,7 +12,7 @@ if (version === undefined) {
 
 const manifestPath = './dist/manifest.json'
 if (!existsSync(manifestPath)) {
-  console.error('Could not find manifest file, please run `yarn build` first.')
+  console.error('Could not find manifest file, please run `yarn build:ext` first.')
   process.exit(1)
 }
 
