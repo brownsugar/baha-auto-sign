@@ -23,6 +23,7 @@ declare global {
       startAd: () => void
       setFinishAd: () => void
       finishAd: () => void
+      loadingFail: () => void
     }
     Dialogify: {
       confirm: (message: string, options: any) => void

@@ -23,7 +23,7 @@ const inject = () => {
     return response
   }
 
-  // Override the video ad behavior.
+  // Override the video AD behavior.
   const videoByReward = window.SigninAd.Player.videoByReward
   window.SigninAd.Player.videoByReward = () => {
     try {
@@ -45,6 +45,9 @@ const inject = () => {
       }, 2000)
     }
   }
+
+  // Remove the AD loading failed dialog.
+  window.SigninAd.loadingFail = () => {}
 
   // Override the Dialogify module behavior.
   const confirm = window.Dialogify.confirm
