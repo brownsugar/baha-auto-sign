@@ -103,4 +103,8 @@ const inject = () => {
   button.setAttribute('onclick', `(${script})()`)
   document.body.appendChild(button)
   button.click()
+
+  chrome.runtime.sendMessage({
+    action: 'page-load'
+  })
 })()

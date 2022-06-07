@@ -1,14 +1,20 @@
+import { event } from './lib/ua'
 import { getConfig } from './lib/config'
 
 // Handle messages
-// chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-//   console.log(request, sender)
-//   const { action } = request
-//   switch (action) {
-//     case 'sign-complete':
-//       break
-//   }
-// })
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  const { action } = request
+  switch (action) {
+    case 'page-load': {
+      const origin = sender.tab?.url
+      if (origin !== undefined) {
+        const url = new URL(origin)
+        event('view', 'hostname', url.hostname)
+      }
+      break
+    }
+  }
+})
 
 // Handle config changes
 const configHandler = {
@@ -60,6 +66,10 @@ const removeLaunchAlarm = () => {
   chrome.alarms.clear(ALARM_LAUNCH)
 }
 const launchBaha = async () => {
+  const config = await getConfig()
+  event('sign', 'time', config.launchTime)
+  event('sign', 'double', Number(config.autoDouble))
+
   const url = 'https://home.gamer.com.tw/homeindex.php'
   const windows = await chrome.windows.getAll()
   if (windows.length > 0) {

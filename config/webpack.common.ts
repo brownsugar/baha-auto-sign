@@ -54,7 +54,10 @@ export default (production: boolean) => {
       new WebpackRemoveEmptyScripts()
     ],
     resolve: {
-      extensions: ['.ts', '.js', '.scss', '.css']
+      extensions: ['.ts', '.js', '.scss', '.css'],
+      fallback: {
+        https: false
+      }
     }
   }
 
