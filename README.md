@@ -14,6 +14,10 @@
 
 [![image](https://user-images.githubusercontent.com/2935980/172036383-b987b4fd-4502-4aea-bfa2-3ebc37893a66.png)](https://brn.sg/BahaAutoSign)
 
+## 功能介紹
+
+請前往巴哈小屋文查看：https://brn.sg/tVe1a
+
 ## 更新紀錄
 
 請查看 [CHANGELOG.md](CHANGELOG.md)。
