@@ -1,7 +1,11 @@
-export const getStorageData = async <T>(items: T | null = null) => {
+const chromeStorage = (local = false) => {
+  const area = local ? 'local' : 'sync'
+  return chrome.storage[area]
+}
+export const getStorageData = async <T>(items: T | null = null, local = false) => {
   return await new Promise<T>((resolve, reject) => {
     // Returns a Promise when callback is not specified in MV3+ (not released yet).
-    chrome.storage.sync.get(items, (data: T) => {
+    chromeStorage(local).get(items, (data: T) => {
       if (chrome.runtime.lastError !== undefined) {
         return reject(chrome.runtime.lastError)
       }
@@ -9,13 +13,13 @@ export const getStorageData = async <T>(items: T | null = null) => {
     })
   })
 }
-export const setStorageData = async <T>(items: T) => {
+export const setStorageData = async <T>(items: T, local = false) => {
   return await new Promise<void>((resolve) => {
-    chrome.storage.sync.set(items, resolve)
+    chromeStorage(local).set(items, resolve)
   })
 }
-export const removeStorageData = async (keys: string[]) => {
+export const removeStorageData = async (keys: string[], local = false) => {
   return await new Promise<void>((resolve) => {
-    chrome.storage.sync.remove(keys, resolve)
+    chromeStorage(local).remove(keys, resolve)
   })
 }

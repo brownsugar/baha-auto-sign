@@ -1,5 +1,7 @@
 import { getStorageData, setStorageData, removeStorageData } from './storage'
 
+export const configLocalPrefix = 'local-'
+
 export interface IConfig {
   autoLaunch: boolean
   launchTime: string
@@ -9,14 +11,26 @@ export interface IConfig {
   hour?: number
   min?: number
 }
+export interface IConfigLocal {
+  disableFunction: boolean
+}
+
 export const defConfig: IConfig = {
   autoLaunch: true,
   launchTime: '00:06',
   autoDouble: true
 }
+export const defConfigLocal: IConfigLocal = {
+  disableFunction: false
+}
+
 export const getConfig = async () => {
   const config = await getStorageData(defConfig)
   await migrateConfig(config)
+  return config
+}
+export const getConfigLocal = async () => {
+  const config = await getStorageData(defConfigLocal, true)
   return config
 }
 

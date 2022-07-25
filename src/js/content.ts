@@ -1,4 +1,4 @@
-import { getConfig } from './lib/config'
+import { getConfig, getConfigLocal } from './lib/config'
 
 interface IInjectedData {
   runtimeId: string
@@ -88,6 +88,11 @@ const inject = () => {
 }
 
 (async () => {
+  const configLocal = await getConfigLocal()
+  if (configLocal.disableFunction) {
+    return
+  }
+
   const config = await getConfig()
   const data = {
     runtimeId: chrome.runtime.id,

@@ -1,5 +1,5 @@
 import { event } from './lib/ua'
-import { getConfig } from './lib/config'
+import { getConfig, getConfigLocal } from './lib/config'
 
 // Handle messages
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
@@ -18,23 +18,30 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
 // Handle config changes
 const configHandler = {
-  autoLaunchChanged: (val: boolean, oldVal: boolean) => {
+  autoLaunchChanged: (val: boolean) => {
     if (val) {
       createLaunchAlarm()
     } else {
       removeLaunchAlarm()
     }
   },
-  launchTimeChanged: (val: string, oldVal: string) => {
+  launchTimeChanged: () => {
     createLaunchAlarm()
+  },
+  disableFunctionChanged: (val: boolean) => {
+    if (val) {
+      removeLaunchAlarm()
+    } else {
+      createLaunchAlarm()
+    }
   }
 }
-chrome.storage.onChanged.addListener((changes) => {
+chrome.storage.onChanged.addListener((changes, areaName) => {
   for (const key in changes) {
     const eventName = key + 'Changed'
     if (eventName in configHandler) {
       const field = changes[key]
-      configHandler[eventName](field.newValue, field.oldValue)
+      configHandler[eventName](field.newValue, field.oldValue, areaName)
     }
   }
 })
@@ -42,9 +49,10 @@ chrome.storage.onChanged.addListener((changes) => {
 // Handle auto launch
 const ALARM_LAUNCH = 'launch'
 const createLaunchAlarm = async () => {
+  const configLocal = await getConfigLocal()
   const config = await getConfig()
 
-  if (!config.autoLaunch || config.launchTime === '') {
+  if (configLocal.disableFunction || !config.autoLaunch || config.launchTime === '') {
     return
   }
 
