@@ -85,6 +85,11 @@ const inject = () => {
       window.Signin.mobile()
     }
   }, 3000)
+
+  // Do nothing if use is not logged in.
+  if (window.BAHAID === '' || window.BAHAID === undefined) {
+    clearTimeout(timer)
+  }
 }
 
 (async () => {

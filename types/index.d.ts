@@ -28,6 +28,7 @@ declare global {
     Dialogify: {
       confirm: (message: string, options: any) => void
     }
+    BAHAID: string
   }
 }
 
