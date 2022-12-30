@@ -1,8 +1,8 @@
 import { resolve } from 'path'
-import * as MiniCssExtractPlugin from 'mini-css-extract-plugin'
-import * as CopyWebpackPlugin from 'copy-webpack-plugin'
-import * as WebpackRemoveEmptyScripts from 'webpack-remove-empty-scripts'
-import * as TerserWebpackPlugin from 'terser-webpack-plugin'
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import CopyWebpackPlugin from 'copy-webpack-plugin'
+import WebpackRemoveEmptyScripts from 'webpack-remove-empty-scripts'
+import TerserWebpackPlugin from 'terser-webpack-plugin'
 import { SourceMapDevToolPlugin } from 'webpack'
 import type { Configuration } from 'webpack'
 
@@ -51,8 +51,7 @@ export default (production: boolean) => {
         filename: '[name].css'
       }),
       // Remove empty js file generated along with scss files.
-      // @ts-expect-error
-      new WebpackRemoveEmptyScripts()
+      new WebpackRemoveEmptyScripts({})
     ],
     resolve: {
       extensions: ['.ts', '.js', '.scss', '.css'],

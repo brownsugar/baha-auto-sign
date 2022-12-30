@@ -5,6 +5,7 @@
     "module": "CommonJS",
     "target": "ES2020",
     "moduleResolution": "node",
+    "esModuleInterop": true,
     "sourceMap": true,
     "strictNullChecks": true
   },

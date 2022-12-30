@@ -1,5 +1,5 @@
 import { readFileSync, writeFileSync, existsSync } from 'fs'
-import * as Zip from 'adm-zip'
+import Zip from 'adm-zip'
 import type { PackageJson } from 'type-fest'
 
 const packageJsonPath = './package.json'
