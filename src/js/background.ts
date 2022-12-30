@@ -2,7 +2,7 @@ import { event } from './lib/ua'
 import { getConfig, getConfigLocal } from './lib/config'
 
 // Handle messages
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener((request, sender, _sendResponse) => {
   const { action } = request
   switch (action) {
     case 'page-load': {

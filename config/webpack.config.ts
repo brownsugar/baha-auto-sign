@@ -21,7 +21,7 @@ const fetchEntries = (dir: string) => {
     }, {})
 }
 
-export default (env: { production: boolean }, argv): Configuration => merge(
+export default (env: { production: boolean }, _argv): Configuration => merge(
   configFactory(env.production),
   {
     mode: env.production ? 'production' : 'development',

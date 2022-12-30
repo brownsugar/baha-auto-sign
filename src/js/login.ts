@@ -5,7 +5,7 @@
 //   "js": [ "js/login.js" ],
 //   "all_frames": true
 // }
-(async () => {
+(() => {
   // const config = await getConfig();
 
   // Fill in login info
