@@ -68,8 +68,10 @@ const inject = () => {
       } catch (e) {
         // Exception will be thrown if ADBlock is enabled.
       } finally {
-        // `startAd` will call `videoByReward`.
-        window.SigninAd.startAd()
+        setTimeout(() => {
+          // `startAd` will call `videoByReward`.
+          window.SigninAd.startAd()
+        }, 1000)
       }
     }
   }
