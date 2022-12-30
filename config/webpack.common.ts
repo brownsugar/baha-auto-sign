@@ -51,6 +51,7 @@ export default (production: boolean) => {
         filename: '[name].css'
       }),
       // Remove empty js file generated along with scss files.
+      // @ts-expect-error
       new WebpackRemoveEmptyScripts()
     ],
     resolve: {

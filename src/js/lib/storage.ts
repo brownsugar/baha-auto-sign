@@ -2,7 +2,7 @@ const chromeStorage = (local = false) => {
   const area = local ? 'local' : 'sync'
   return chrome.storage[area]
 }
-export const getStorageData = async <T>(items: T | null = null, local = false) => {
+export const getStorageData = async <T extends Record<string, any>>(items: T | null = null, local = false) => {
   return await new Promise<T>((resolve, reject) => {
     // Returns a Promise when callback is not specified in MV3+ (not released yet).
     chromeStorage(local).get(items, (data: T) => {
@@ -13,7 +13,7 @@ export const getStorageData = async <T>(items: T | null = null, local = false) =
     })
   })
 }
-export const setStorageData = async <T>(items: T, local = false) => {
+export const setStorageData = async <T extends Record<string, any>>(items: T, local = false) => {
   return await new Promise<void>((resolve) => {
     chromeStorage(local).set(items, resolve)
   })
