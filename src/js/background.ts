@@ -1,5 +1,7 @@
-import { event } from './lib/ua'
+import { pageView, event } from './lib/ga'
 import { getConfig, getConfigLocal } from './lib/config'
+
+pageView()
 
 // Handle messages
 chrome.runtime.onMessage.addListener((request, sender, _sendResponse) => {

@@ -6,6 +6,7 @@ export interface IConfig {
   autoLaunch: boolean
   launchTime: string
   autoDouble: boolean
+  clientId: string | null
   // Deprecated since v1.0
   autoOpen?: boolean
   hour?: number
@@ -18,7 +19,8 @@ export interface IConfigLocal {
 export const defConfig: IConfig = {
   autoLaunch: true,
   launchTime: '00:06',
-  autoDouble: true
+  autoDouble: true,
+  clientId: null
 }
 export const defConfigLocal: IConfigLocal = {
   disableFunction: false
