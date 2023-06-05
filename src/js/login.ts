@@ -13,12 +13,11 @@
 
   // Check auto login
   const autologin = document.querySelector('#check-autologin') as HTMLInputElement
-  if (autologin !== null) {
+  if (autologin !== null)
     autologin.checked = true
-  }
+
   // Submit the form
   const login = document.querySelector('#btn-login') as HTMLInputElement
-  if (login !== null) {
+  if (login !== null)
     login.click()
-  }
 })()

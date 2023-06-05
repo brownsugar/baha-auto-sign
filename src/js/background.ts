@@ -21,21 +21,19 @@ chrome.runtime.onMessage.addListener((request, sender, _sendResponse) => {
 // Handle config changes
 const configHandler = {
   autoLaunchChanged: (val: boolean) => {
-    if (val) {
+    if (val)
       createLaunchAlarm()
-    } else {
+    else
       removeLaunchAlarm()
-    }
   },
   launchTimeChanged: () => {
     createLaunchAlarm()
   },
   disableFunctionChanged: (val: boolean) => {
-    if (val) {
+    if (val)
       removeLaunchAlarm()
-    } else {
+    else
       createLaunchAlarm()
-    }
   }
 }
 chrome.storage.onChanged.addListener((changes, areaName) => {
@@ -54,9 +52,8 @@ const createLaunchAlarm = async () => {
   const configLocal = await getConfigLocal()
   const config = await getConfig()
 
-  if (configLocal.disableFunction || !config.autoLaunch || config.launchTime === '') {
+  if (configLocal.disableFunction || !config.autoLaunch || config.launchTime === '')
     return
-  }
 
   const [hour, minute] = config.launchTime.split(':')
     .map(string => Number(string))

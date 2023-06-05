@@ -9,9 +9,8 @@ interface IAdsPopup extends HTMLElement {
 }
 
 const inject = () => {
-  if (window.Signin === undefined) {
+  if (window.Signin === undefined)
     return
-  }
 
   const data: IInjectedData = JSON.parse('INJECTED_DATA')
 
@@ -53,9 +52,8 @@ const inject = () => {
   const confirm = window.Dialogify.confirm
   window.Dialogify.confirm = (message: string, options: any) => {
     // Intercept the AD confirm dialog, we don't need this.
-    if (message !== '是否觀看廣告？') {
+    if (message !== '是否觀看廣告？')
       confirm.call(window.Dialogify, message, options)
-    }
   }
 
   // Define the action after sign in is completed.
@@ -78,27 +76,24 @@ const inject = () => {
 
   // Auto sign will not be triggered when current time is earlier than 00:06.
   // If it's not triggered in 3 seconds, do it manually.
-  // eslint-disable-next-line @typescript-eslint/no-misused-promises
+
   const timer = setTimeout(async () => {
     const status = await window.Signin.checkSigninStatus()
-    if (status.data.signin === 1) {
+    if (status.data.signin === 1)
       onSignComplete(status.data.finishedAd === 0)
-    } else {
+    else
       window.Signin.mobile()
-    }
   }, 3000)
 
   // Do nothing if use is not logged in.
-  if (window.BAHAID === '' || window.BAHAID === undefined) {
+  if (window.BAHAID === '' || window.BAHAID === undefined)
     clearTimeout(timer)
-  }
 }
 
 (async () => {
   const configLocal = await getConfigLocal()
-  if (configLocal.disableFunction) {
+  if (configLocal.disableFunction)
     return
-  }
 
   const config = await getConfig()
   const data = {

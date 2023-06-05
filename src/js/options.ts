@@ -24,11 +24,10 @@ import { setStorageData } from './lib/storage'
     const baseConfig = isLocal ? configLocal : config
     if (key in baseConfig) {
       const type = el.type
-      if (type === 'checkbox') {
+      if (type === 'checkbox')
         el.checked = baseConfig[key]
-      } else {
+      else
         el.value = baseConfig[key]
-      }
     }
   })
   // Listen to form change event

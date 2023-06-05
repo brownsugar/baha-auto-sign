@@ -5,9 +5,8 @@ import { setStorageData } from './storage'
 
 const getClientId = async () => {
   const { clientId } = await getConfig()
-  if (clientId) {
+  if (clientId)
     return clientId
-  }
   const newClientId = crypto.randomUUID()
   await setStorageData({
     clientId: newClientId
