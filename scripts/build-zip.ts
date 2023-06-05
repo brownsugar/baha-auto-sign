@@ -1,9 +1,7 @@
 import { readFileSync, writeFileSync, existsSync } from 'fs'
 import Zip from 'adm-zip'
-import type { PackageJson } from 'type-fest'
+import packageJson from '../package.json'
 
-const packageJsonPath = './package.json'
-const packageJson: PackageJson = JSON.parse(readFileSync(packageJsonPath, 'utf-8'))
 const version = packageJson.version
 if (version === undefined) {
   console.error('Could not fetch package version.')
