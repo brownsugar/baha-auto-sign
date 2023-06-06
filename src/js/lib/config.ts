@@ -13,6 +13,9 @@ export interface IConfig {
   min?: number
 }
 export interface IConfigLocal {
+  autoLogin: boolean
+  loginUsername: string
+  loginPassword: string
   disableFunction: boolean
 }
 
@@ -23,6 +26,9 @@ export const defConfig: IConfig = {
   clientId: null
 }
 export const defConfigLocal: IConfigLocal = {
+  autoLogin: false,
+  loginUsername: '',
+  loginPassword: '',
   disableFunction: false
 }
 

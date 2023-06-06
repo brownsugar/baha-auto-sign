@@ -3,6 +3,7 @@ import { getConfig, getConfigLocal } from './lib/config'
 interface IInjectedData {
   runtimeId: string
   autoDouble: boolean
+  autoLogin: boolean
 }
 interface IAdsPopup extends HTMLElement {
   close: () => void
@@ -76,7 +77,6 @@ const inject = () => {
 
   // Auto sign will not be triggered when current time is earlier than 00:06.
   // If it's not triggered in 3 seconds, do it manually.
-
   const timer = setTimeout(async () => {
     const status = await window.Signin.checkSigninStatus()
     if (status.data.signin === 1)
@@ -85,9 +85,14 @@ const inject = () => {
       window.Signin.mobile()
   }, 3000)
 
+  const isVisitor = window.BAHAID === '' || window.BAHAID === undefined
   // Do nothing if use is not logged in.
-  if (window.BAHAID === '' || window.BAHAID === undefined)
+  if (isVisitor) {
     clearTimeout(timer)
+
+    if (data.autoLogin && window.User?.Login?.requireLoginIframe)
+      window.User.Login.requireLoginIframe()
+  }
 }
 
 (async () => {
@@ -98,7 +103,8 @@ const inject = () => {
   const config = await getConfig()
   const data = {
     runtimeId: chrome.runtime.id,
-    autoDouble: config.autoDouble
+    autoDouble: config.autoDouble,
+    autoLogin: configLocal.autoLogin
   }
   const script = inject.toString()
     .replace('INJECTED_DATA', JSON.stringify(data))

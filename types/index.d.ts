@@ -1,5 +1,10 @@
 declare global {
   interface Window {
+    User: {
+      Login: {
+        requireLoginIframe: (callback?: any, title?: string) => void
+      }
+    }
     Signin: {
       mobile: () => void
       signinWork: () => Promise<any>

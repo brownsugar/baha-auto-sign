@@ -1,23 +1,32 @@
-// [WIP] Auto login
-// {
-//   "run_at": "document_end",
-//   "matches": [ "https:\/\/user.gamer.com.tw/login.php" ],
-//   "js": [ "js/login.js" ],
-//   "all_frames": true
-// }
+import { getConfigLocal } from './lib/config'
+
 (() => {
-  // const config = await getConfig();
+  const doLogin = async () => {
+    const configLocal = await getConfigLocal()
+    if (!configLocal.autoLogin || !configLocal.loginUsername || !configLocal.loginPassword)
+      return
 
-  // Fill in login info
-  // ...
+    // Fill in login info
+    const username = document.querySelector('#form-login input[name=userid]') as HTMLInputElement
+    if (username !== null)
+      username.value = configLocal.loginUsername
 
-  // Check auto login
-  const autologin = document.querySelector('#check-autologin') as HTMLInputElement
-  if (autologin !== null)
-    autologin.checked = true
+    const password = document.querySelector('#form-login input[name=password]') as HTMLInputElement
+    if (password !== null)
+      password.value = configLocal.loginPassword
 
-  // Submit the form
-  const login = document.querySelector('#btn-login') as HTMLInputElement
-  if (login !== null)
-    login.click()
+    // Check auto login
+    const autologin = document.querySelector('#check-autologin') as HTMLInputElement
+    if (autologin !== null)
+      autologin.checked = true
+
+    // Submit the form
+    setTimeout(() => {
+      const login = document.querySelector('#btn-login') as HTMLInputElement
+      if (login !== null)
+        login.click()
+    })
+  }
+
+  window.addEventListener('load', doLogin)
 })()

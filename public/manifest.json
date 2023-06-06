@@ -24,6 +24,12 @@
       "run_at": "document_end",
       "matches": [ "https:\/\/*.gamer.com.tw/*" ],
       "js": [ "js/content.js" ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [ "https:\/\/user.gamer.com.tw/login.php" ],
+      "js": [ "js/login.js" ],
+      "all_frames": true
     }
   ]
 }

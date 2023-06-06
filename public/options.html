@@ -13,10 +13,6 @@
       <label for="auto-launch" class="pure-checkbox">
         <input type="checkbox" id="auto-launch" checked /> 自動在背景開啟分頁/瀏覽器簽到
       </label>
-      <div class="hint">
-        若瀏覽器為開啓狀態時，將自動開啓新分頁簽到；若關閉時則開啓瀏覽器簽到。兩者皆於背景執行，不會打擾到簽到當下的其他操作。<br>
-        記得先開啓瀏覽器「執行背景應用程式」的權限，自動開啓瀏覽器的功能才會生效，設定方式詳見 <a href="https://brn.sg/tVe1a">本教學</a>。
-      </div>
       <div class="pure-g align-item-center">
         <div class="pure-u-1-6">
           <label for="launch-time" class="my-0">開啟時間</label>
@@ -26,6 +22,10 @@
         </div>
       </div>
       <span class="pure-form-message">不建議設定剛好 0 點，避免產生時間差問題。</span>
+      <div class="hint">
+        若瀏覽器為開啓狀態時，將自動開啓新分頁簽到；若關閉時則開啓瀏覽器簽到。兩者皆於背景執行，不會打擾到簽到當下的其他操作。<br>
+        記得先開啓瀏覽器「執行背景應用程式」的權限，自動開啓瀏覽器的功能才會生效，設定方式詳見 <a href="https://brn.sg/tVe1a">本教學</a>。
+      </div>
     </fieldset>
     <fieldset>
       <legend>💰 雙倍巴幣</legend>
@@ -34,6 +34,32 @@
       </label>
       <div class="hint">
         簽到完成時，自動執行「領取雙倍巴幣」功能。
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>🚀 自動登入</legend>
+      <label for="local-auto-login" class="pure-checkbox">
+        <input type="checkbox" id="local-auto-login" /> 啓用
+      </label>
+      <div class="pure-g align-item-center">
+        <div class="pure-u-1-6">
+          <label for="launch-time" class="my-0">帳號</label>
+        </div>
+        <div>
+          <input type="text" id="local-login-username" class="pure-input-rounded" />
+        </div>
+      </div>
+      <div class="pure-g align-item-center">
+        <div class="pure-u-1-6">
+          <label for="launch-time" class="my-0">密碼</label>
+        </div>
+        <div>
+          <input type="password" id="local-login-password" class="pure-input-rounded" />
+        </div>
+      </div>
+      <span class="pure-form-message">於此設定的登入資訊只會存在於目前使用的裝置，不會同步到其他裝置中。</span>
+      <div class="hint">
+        帳號未登入或登入狀態過期時，自動執行登入功能。
       </div>
     </fieldset>
     <fieldset>
