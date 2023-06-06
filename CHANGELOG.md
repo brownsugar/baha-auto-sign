@@ -1,5 +1,15 @@
 # 更新紀錄 Changelog
 
+## 1.3.0（WIP）
+
+### 新增
+
+ - 自動使用帳號密碼登入功能
+
+### 改動
+
+ - 將 Universal Analytics 升級為 Google Analytics 4
+
 ## 1.2.0（2022/12/31）
 
 ### 新增
