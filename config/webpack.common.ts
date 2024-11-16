@@ -64,13 +64,7 @@ export default (production: boolean) => {
   if (production) {
     config.optimization = {
       minimize: true,
-      minimizer: [new TerserWebpackPlugin({
-        terserOptions: {
-          format: {
-            quote_style: 1, // AlwaysSingle
-          },
-        },
-      })],
+      minimizer: [new TerserWebpackPlugin()],
     }
   } else {
     config.plugins?.push(
