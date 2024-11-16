@@ -96,7 +96,7 @@ interface IAdsPopup extends HTMLElement {
       window.Signin.mobile()
   }, 3000)
 
-  const isVisitor = !/;.BAHAID=([^;]+)/i.test(document.cookie)
+  const isVisitor = !document.cookie.includes('BAHAID=')
   // Do nothing if use is not logged in.
   if (isVisitor) {
     clearTimeout(timer)
