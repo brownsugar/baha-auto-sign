@@ -86,7 +86,7 @@ const inject = () => {
       window.Signin.mobile()
   }, 3000)
 
-  const isVisitor = window.BAHAID === '' || window.BAHAID === undefined
+  const isVisitor = !/;.BAHAID=([^;]+)/i.test(document.cookie)
   // Do nothing if use is not logged in.
   if (isVisitor) {
     clearTimeout(timer)
