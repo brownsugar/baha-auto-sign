@@ -9,21 +9,21 @@ const getClientId = async () => {
     return clientId
   const newClientId = crypto.randomUUID()
   await setStorageData({
-    clientId: newClientId
+    clientId: newClientId,
   })
   return newClientId
 }
 
 const tracker = new MeasurementProtocol({
   measurementId: 'G-NX79VZYHXW',
-  apiSecret: 'rmdsr5hJRziNCWcQbrvTuw'
+  apiSecret: 'rmdsr5hJRziNCWcQbrvTuw',
 })
 
 const sendEvents = async (events: Event[]) =>
   await tracker.send({
     client_id: await getClientId(),
     non_personalized_ads: true,
-    events
+    events,
   })
 
 const pageView = async () =>
@@ -31,9 +31,9 @@ const pageView = async () =>
     {
       name: 'page_view',
       params: {
-        page_location: location.origin + '/background'
-      }
-    }
+        page_location: location.origin + '/background',
+      },
+    },
   ])
 
 const event = async (category, action, label) =>
@@ -41,9 +41,9 @@ const event = async (category, action, label) =>
     {
       name: category,
       params: {
-        [action]: label
-      }
-    }
+        [action]: label,
+      },
+    },
   ])
 
 event('extension', 'language', chrome.i18n.getUILanguage())

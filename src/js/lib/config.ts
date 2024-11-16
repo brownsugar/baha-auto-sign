@@ -23,13 +23,13 @@ export const defConfig: IConfig = {
   autoLaunch: true,
   launchTime: '00:06',
   autoDouble: true,
-  clientId: null
+  clientId: null,
 }
 export const defConfigLocal: IConfigLocal = {
   autoLogin: false,
   loginUsername: '',
   loginPassword: '',
-  disableFunction: false
+  disableFunction: false,
 }
 
 export const getConfig = async () => {
@@ -53,7 +53,7 @@ const migrateConfig = async (config: IConfig) => {
     await removeStorageData([
       'autoOpen',
       'hour',
-      'min'
+      'min',
     ])
     await setStorageData(config)
   }

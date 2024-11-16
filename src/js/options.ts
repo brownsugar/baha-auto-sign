@@ -3,7 +3,7 @@ import {
   defConfig,
   defConfigLocal,
   getConfig,
-  getConfigLocal
+  getConfigLocal,
 } from './lib/config'
 import { setStorageData } from './lib/storage'
 
@@ -31,7 +31,7 @@ import { setStorageData } from './lib/storage'
     }
   })
   // Listen to form change event
-  document.querySelector('form')?.addEventListener('change', (e) => {
+  document.querySelector('form')?.addEventListener('change', e => {
     const target = e.target as HTMLInputElement
     if (e.type === 'change' && target !== null) {
       const id = target.id
@@ -45,7 +45,7 @@ import { setStorageData } from './lib/storage'
       const baseConfig = isLocal ? defConfigLocal : defConfig
       if (key in baseConfig) {
         setStorageData({
-          [key]: value
+          [key]: value,
         }, isLocal)
       }
     }

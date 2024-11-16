@@ -12,30 +12,30 @@ export default (production: boolean) => {
     output: {
       path: distPath,
       filename: '[name].js',
-      clean: true
+      clean: true,
     },
     stats: {
       all: false,
       errors: true,
       builtAt: true,
-      assets: true
+      assets: true,
     },
     module: {
       rules: [
         {
           test: /\.tsx?$/,
           use: 'ts-loader',
-          exclude: /node_modules/
+          exclude: /node_modules/,
         },
         {
           test: /\.s[ac]ss$/i,
           use: [
             MiniCssExtractPlugin.loader,
             'css-loader',
-            'sass-loader'
-          ]
-        }
-      ]
+            'sass-loader',
+          ],
+        },
+      ],
     },
     plugins: [
       new CopyWebpackPlugin({
@@ -43,22 +43,22 @@ export default (production: boolean) => {
           {
             from: '**/*',
             to: distPath,
-            context: 'public'
-          }
-        ]
+            context: 'public',
+          },
+        ],
       }),
       new MiniCssExtractPlugin({
-        filename: '[name].css'
+        filename: '[name].css',
       }),
       // Remove empty js file generated along with scss files.
-      new WebpackRemoveEmptyScripts({})
+      new WebpackRemoveEmptyScripts({}),
     ],
     resolve: {
       extensions: ['.ts', '.js', '.scss', '.css'],
       fallback: {
-        https: false
-      }
-    }
+        https: false,
+      },
+    },
   }
 
   if (production) {
@@ -67,18 +67,18 @@ export default (production: boolean) => {
       minimizer: [new TerserWebpackPlugin({
         terserOptions: {
           format: {
-            quote_style: 1 // AlwaysSingle
-          }
-        }
-      })]
+            quote_style: 1, // AlwaysSingle
+          },
+        },
+      })],
     }
   } else {
     config.plugins?.push(
       new SourceMapDevToolPlugin({
         filename: '[file].map',
         // Set the public path to parent due to pre-defined path in entry points.
-        publicPath: '../'
-      })
+        publicPath: '../',
+      }),
     )
   }
 

@@ -34,7 +34,7 @@ const configHandler = {
       removeLaunchAlarm()
     else
       createLaunchAlarm()
-  }
+  },
 }
 chrome.storage.onChanged.addListener((changes, areaName) => {
   for (const key in changes) {
@@ -66,7 +66,7 @@ const createLaunchAlarm = async () => {
 
   removeLaunchAlarm()
   chrome.alarms.create(ALARM_LAUNCH, {
-    when: targetTime
+    when: targetTime,
   })
 }
 const removeLaunchAlarm = () => {
@@ -82,17 +82,17 @@ const launchBaha = async () => {
   if (windows.length > 0) {
     chrome.tabs.create({
       url,
-      active: false
+      active: false,
     })
   } else {
     chrome.windows.create({
       url,
-      focused: false
+      focused: false,
     })
   }
 }
 createLaunchAlarm()
-chrome.alarms.onAlarm.addListener((alarm) => {
+chrome.alarms.onAlarm.addListener(alarm => {
   if (alarm.name === ALARM_LAUNCH) {
     launchBaha()
     createLaunchAlarm()

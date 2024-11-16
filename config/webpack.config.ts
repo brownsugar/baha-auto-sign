@@ -8,7 +8,7 @@ const srcPath = resolve(__dirname, '../src')
 const fetchEntries = (dir: string) => {
   const path = resolve(srcPath, dir)
   return readdirSync(path, {
-    withFileTypes: true
+    withFileTypes: true,
   })
     .reduce((result, dirent) => {
       if (dirent.isFile()) {
@@ -27,8 +27,8 @@ export default (env: { production: boolean }, _argv): Configuration => merge(
     mode: env.production ? 'production' : 'development',
     entry: {
       ...fetchEntries('js'),
-      ...fetchEntries('style')
+      ...fetchEntries('style'),
     },
-    devtool: false
-  }
+    devtool: false,
+  },
 )

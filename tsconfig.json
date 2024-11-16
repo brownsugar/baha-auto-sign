@@ -11,7 +11,7 @@
     "strictNullChecks": true
   },
   "include": [
-    ".eslintrc.js",
+    "eslint.config.mjs",
     "config/*.ts",
     "src/**/*.ts",
     "scripts/*.ts",

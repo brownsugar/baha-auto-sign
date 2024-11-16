@@ -28,7 +28,8 @@ const inject = () => {
   window.SigninAd.Player.videoByReward = () => {
     try {
       videoByReward.call(window.SigninAd.Player)
-    } catch (e) {
+    } catch (_e) {
+      // Do nothing.
     } finally {
       // Close `廣告載入中` dialog manually as user who enabled ADBlock will cause the dialog stuck.
       const popup = document.querySelector('.dialogify__adsPopup') as IAdsPopup
@@ -64,7 +65,7 @@ const inject = () => {
       // Make sure the ad module has been initialized.
       try {
         window.SigninAd.initAd()
-      } catch (e) {
+      } catch (_e) {
         // Exception will be thrown if ADBlock is enabled.
       } finally {
         setTimeout(() => {
@@ -104,7 +105,7 @@ const inject = () => {
   const data = {
     runtimeId: chrome.runtime.id,
     autoDouble: config.autoDouble,
-    autoLogin: configLocal.autoLogin
+    autoLogin: configLocal.autoLogin,
   }
   const script = inject.toString()
     .replace('INJECTED_DATA', JSON.stringify(data))
@@ -118,6 +119,6 @@ const inject = () => {
   button.click()
 
   chrome.runtime.sendMessage({
-    action: 'page-load'
+    action: 'page-load',
   })
 })()
