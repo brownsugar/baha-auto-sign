@@ -5,6 +5,7 @@ export const configLocalPrefix = 'local-'
 export interface IConfig {
   autoLaunch: boolean
   launchTime: string
+  launchUrl: string
   autoDouble: boolean
   autoDestroy: boolean
   clientId: string | null
@@ -23,6 +24,7 @@ export interface IConfigLocal {
 export const defConfig: IConfig = {
   autoLaunch: true,
   launchTime: '00:06',
+  launchUrl: '',
   autoDouble: true,
   autoDestroy: false,
   clientId: null,

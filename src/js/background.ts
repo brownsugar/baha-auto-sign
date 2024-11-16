@@ -90,7 +90,10 @@ const launchBaha = async () => {
   event('sign', 'double', Number(config.autoDouble))
   event('sign', 'destroy', Number(config.autoDestroy))
 
-  const url = 'https://home.gamer.com.tw/homeindex.php'
+  let url = 'https://home.gamer.com.tw/homeindex.php'
+  if (config.launchUrl && !!URL.parse(config.launchUrl))
+    url = config.launchUrl
+
   const windows = await chrome.windows.getAll()
   if (windows.length > 0) {
     const tab = await chrome.tabs.create({
