@@ -9,26 +9,40 @@ a {
 }
 form {
   min-width: 350px;
-  padding: 20px;
+  padding: 0 20px 10px;
 
   input {
     line-height: 1;
   }
 }
+.pure-form fieldset + fieldset {
+  margin-top: .5em;
+}
+.pure-form legend {
+  font-size: 1.125em;
+}
+.label {
+  background: #fafafa;
+  color: #333;
+  padding: .2em .4em;
+  font-size: .5em;
+  border: .1rem solid rgba(0, 0, 0, .05);
+  border-radius: .2rem;
+}
 .pure-form .pure-checkbox {
-  margin-bottom: 1em;
+  display: flex;
+
+  input {
+    margin-right: .5em;
+  }
 }
 .hint {
   background: #FFFFF3;
   color: #333;
-  padding: 0.4em 0.8em;
+  padding: .4em .8em;
   font-size: .875em;
-  border: 0.1rem solid rgba(0, 0, 0, .1);
-  border-radius: 0.4rem;
-
-  &:not(:last-child) {
-    margin-bottom: 1em;
-  }
+  border: .1rem solid rgba(0, 0, 0, .1);
+  border-radius: .4rem;
 }
 footer {
   font-size: .875em;

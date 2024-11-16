@@ -15,7 +15,7 @@
       </label>
       <div class="pure-g align-item-center">
         <div class="pure-u-1-6">
-          <label for="launch-time" class="my-0">開啟時間</label>
+          <label for="launch-time" class="my-0">執行時間</label>
         </div>
         <div>
           <input type="time" id="launch-time" class="pure-input-rounded" value="00:06" />
@@ -34,6 +34,15 @@
       </label>
       <div class="hint">
         簽到完成時，自動執行「領取雙倍巴幣」功能。
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>♻️ 自動關閉簽到分頁 <span class="label">實驗性</span></legend>
+      <label for="auto-destroy" class="pure-checkbox">
+        <input type="checkbox" id="auto-destroy" /> 啟用
+      </label>
+      <div class="hint">
+        簽到完成後，關閉自動開啓的分頁。
       </div>
     </fieldset>
     <fieldset>
@@ -63,21 +72,19 @@
       </div>
     </fieldset>
     <fieldset>
-      <legend>⚡️ 防打擾</legend>
+      <legend>💤 防打擾</legend>
       <label for="local-disable-function" class="pure-checkbox">
         <input type="checkbox" id="local-disable-function" /> 在目前裝置停用自動簽到功能
       </label>
-      <div class="hint">
-        此設定僅應用於目前使用的裝置，不會同步到其他裝置中。
-      </div>
+      <span class="pure-form-message">此設定僅應用於目前使用的裝置，不會同步到其他裝置中。</span>
     </fieldset>
   </form>
   <footer>
     <div class="more-and-more">
-      更多擴充功能：<a href="https://brn.sg/LINEStickerPacker?utm_source=BahaAutoSign" target="_blank">LINE 貼圖打包</a>
+      更多擴充功能：<a href="https://brn.sg/LINEStickerPacker?utm_source=BahaAutoSign&utm_medium=Options&utm_campaign=Footer" target="_blank">LINE 貼圖打包</a>
     </div>
     <ul class="copyright">
-      <li>By <a href="https://brownsugar.tw" target="_blank">Brownsugar</a></li>
+      <li>By <a href="https://brn.sg/home?utm_source=BahaAutoSign&utm_medium=Options&utm_campaign=Footer" target="_blank">Brownsugar</a></li>
       <li><a href="https://github.com/brownsugar/baha-auto-sign" target="_blank">Source code</a></li>
     </ul>
   </footer>

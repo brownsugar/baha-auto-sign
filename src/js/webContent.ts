@@ -1,4 +1,4 @@
-import type { IInjectedData } from '../../types'
+import type { IInjectedWebData } from '../../types'
 
 interface IAdsPopup extends HTMLElement {
   close: () => void
@@ -9,20 +9,28 @@ interface IAdsPopup extends HTMLElement {
   if (!window.Signin || !srcScript)
     return
 
-  const data: IInjectedData = srcScript.getAttributeNames()
-    .reduce((result, attr) => {
-      if (attr.startsWith('data-')) {
-        const key = attr.replace('data-', '')
-        const value = srcScript.getAttribute(attr)
-        if (value === 'true' || value === 'false')
-          result[key] = value === 'true'
-        else if (!isNaN(Number(value)))
-          result[key] = Number(value)
-        else
-          result[key] = value
-      }
-      return result
-    }, {} as IInjectedData)
+  // Parse the injected data.
+  const data = JSON.parse(srcScript.getAttribute('data-bas') ?? '{}') as IInjectedWebData
+
+  // Dispatch a complete event on the source tag.
+  const dispatchSignCompleteEvent = () => {
+    srcScript.dispatchEvent(new CustomEvent('bas-sign-complete'))
+  }
+
+  // Override the Dialogify module behavior.
+  const dConfirm = window.Dialogify.confirm
+  window.Dialogify.confirm = (message: string, options: any) => {
+    // Bypass the watch AD confirmation dialog.
+    if (message !== '是否觀看廣告？')
+      dConfirm.call(window.Dialogify, message, options)
+  }
+  const dAlert = window.Dialogify.alert
+  window.Dialogify.alert = (message: string) => {
+    // Monitor the AD watch status.
+    if (message.includes('觀看廣告完成'))
+      dispatchSignCompleteEvent()
+    dAlert.call(window.Dialogify, message)
+  }
 
   // Override the default sign in behavior.
   const signinWork = window.Signin.signinWork
@@ -52,20 +60,12 @@ interface IAdsPopup extends HTMLElement {
           }
         }
         window.SigninAd.setFinishAd()
-      }, 1000)
+      }, 1300)
     }
   }
 
   // Remove the AD loading failed dialog.
   window.SigninAd.loadingFail = () => {}
-
-  // Override the Dialogify module behavior.
-  const confirm = window.Dialogify.confirm
-  window.Dialogify.confirm = (message: string, options: any) => {
-    // Intercept the AD confirm dialog, we don't need this.
-    if (message !== '是否觀看廣告？')
-      confirm.call(window.Dialogify, message, options)
-  }
 
   // Define the action after sign in is completed.
   const onSignComplete = (getAdReward = true) => {
@@ -80,9 +80,10 @@ interface IAdsPopup extends HTMLElement {
         setTimeout(() => {
           // `startAd` will call `videoByReward`.
           window.SigninAd.startAd()
-        }, 1500)
+        }, 1000)
       }
-    }
+    } else
+      dispatchSignCompleteEvent()
   }
 
   // Auto sign will not be triggered when current time is earlier than 00:06.

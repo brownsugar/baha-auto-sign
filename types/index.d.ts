@@ -32,11 +32,12 @@ declare global {
     }
     Dialogify: {
       confirm: (message: string, options: any) => void
+      alert: (message: string) => void
     }
   }
 }
 
-export interface IInjectedData {
+export interface IInjectedWebData {
   runtimeId: string
   autoDouble: boolean
   autoLogin: boolean

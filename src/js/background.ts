@@ -4,6 +4,14 @@ import { getConfig, getConfigLocal } from './lib/config'
 pageView()
 
 // Handle messages
+let lastTabId: number | undefined
+const onSignComplete = async () => {
+  const config = await getConfig()
+  if (config.autoDestroy && lastTabId !== undefined) {
+    chrome.tabs.remove(lastTabId)
+    lastTabId = undefined
+  }
+}
 chrome.runtime.onMessage.addListener((request, sender, _sendResponse) => {
   const { action } = request
   switch (action) {
@@ -13,6 +21,10 @@ chrome.runtime.onMessage.addListener((request, sender, _sendResponse) => {
         const url = new URL(origin)
         event('view', 'hostname', url.hostname)
       }
+      break
+    }
+    case 'sign-complete': {
+      onSignComplete()
       break
     }
   }
@@ -76,19 +88,22 @@ const launchBaha = async () => {
   const config = await getConfig()
   event('sign', 'time', config.launchTime)
   event('sign', 'double', Number(config.autoDouble))
+  event('sign', 'destroy', Number(config.autoDestroy))
 
   const url = 'https://home.gamer.com.tw/homeindex.php'
   const windows = await chrome.windows.getAll()
   if (windows.length > 0) {
-    chrome.tabs.create({
+    const tab = await chrome.tabs.create({
       url,
       active: false,
     })
+    lastTabId = tab.id
   } else {
-    chrome.windows.create({
+    const window = await chrome.windows.create({
       url,
       focused: false,
     })
+    lastTabId = window.tabs?.[0].id
   }
 }
 createLaunchAlarm()
