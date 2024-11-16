@@ -31,5 +31,11 @@
       "js": [ "js/login.js" ],
       "all_frames": true
     }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [ "js/webContent.js" ],
+      "matches": [ "https:\/\/*.gamer.com.tw/*" ]
+    }
   ]
 }
