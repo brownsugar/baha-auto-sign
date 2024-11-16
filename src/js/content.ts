@@ -71,7 +71,7 @@ const inject = () => {
         setTimeout(() => {
           // `startAd` will call `videoByReward`.
           window.SigninAd.startAd()
-        }, 1000)
+        }, 1500)
       }
     }
   }
