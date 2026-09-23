@@ -9,75 +9,129 @@
 <body>
   <form class="pure-form">
     <fieldset>
-      <legend>⏰ 定時簽到</legend>
+      <legend>⏰ 定時簽到 <button type="button" class="info-btn" data-target="info-schedule" aria-expanded="false" aria-label="顯示說明">!</button></legend>
       <label for="auto-launch" class="pure-checkbox">
         <input type="checkbox" id="auto-launch" checked /> 自動在背景開啟分頁/瀏覽器簽到
       </label>
       <div class="pure-g align-item-center">
-        <div class="pure-u-1-6">
-          <label for="launch-time" class="my-0">執行時間</label>
+        <div class="pure-u-1-5">
+          <span class="my-0">執行時間</span>
         </div>
         <div>
-          <input type="time" id="launch-time" class="pure-input-rounded" value="00:06" />
+          <button type="button" id="time-trigger" class="time-trigger" aria-expanded="false" aria-controls="time-panel">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            <span id="time-trigger-text">00:06</span>
+            <span class="arrow" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+          </button>
+        </div>
+        <span class="after-hint" id="next-run-hint">計算中…</span>
+      </div>
+      <div class="time-panel-wrap" id="time-panel-wrap">
+        <div class="time-panel collapse" id="time-panel">
+          <div class="roller-row">
+            <div class="roller-col roller-col-period">
+              <div class="roller-viewport">
+                <div class="roller-list" id="roller-period" tabindex="0" role="listbox" aria-label="上午下午"></div>
+                <div class="roller-highlight" aria-hidden="true"></div>
+              </div>
+              <div class="roller-caption">時段</div>
+            </div>
+            <div class="roller-col">
+              <div class="roller-viewport">
+                <div class="roller-list" id="roller-hour" tabindex="0" role="listbox" aria-label="小時"></div>
+                <div class="roller-highlight" aria-hidden="true"></div>
+              </div>
+              <div class="roller-caption">時</div>
+            </div>
+            <div class="roller-sep" aria-hidden="true">:</div>
+            <div class="roller-col">
+              <div class="roller-viewport">
+                <div class="roller-list" id="roller-min" tabindex="0" role="listbox" aria-label="分鐘"></div>
+                <div class="roller-highlight" aria-hidden="true"></div>
+              </div>
+              <div class="roller-caption">分</div>
+            </div>
+          </div>
+          <div class="chip-row">
+            <button type="button" class="chip pill" data-time="00:06">00:06 預設</button>
+            <button type="button" class="chip pill" data-time="00:30">00:30 避壅塞</button>
+            <button type="button" class="chip pill" data-time="06:00">06:00 早鳥</button>
+          </div>
+          <!-- 隱藏欄位：維持與舊儲存格式 launchTime "HH:MM" 相容 -->
+          <input type="hidden" id="launch-time" value="00:06" />
         </div>
       </div>
-      <span class="pure-form-message">不建議設定剛好 0 點，避免產生時間差問題。</span>
+      <button type="button" class="pure-form-message btn-reset warn-link" id="midnight-warn">不建議設定剛好 0 點，避免產生時間差問題。</button>
       <div class="pure-g align-item-center">
-        <div class="pure-u-1-6">
+        <div class="pure-u-1-5">
           <label for="launch-url" class="my-0">簽到網頁</label>
         </div>
-        <div class="pure-u-5-6">
+        <div class="pure-u-4-5">
           <input type="url" id="launch-url" class="pure-input-rounded full-width" placeholder="https://..." />
         </div>
       </div>
       <span class="pure-form-message">自訂要開啓的簽到頁面，留空使用預設值（自己小屋）。因巴哈首頁不定時有廣告頁轉址，<b>非常不建議填寫首頁</b>。</span>
-      <div class="hint">
-        若瀏覽器為開啓狀態時，將自動開啓新分頁簽到；若關閉時則開啓瀏覽器簽到。兩者皆於背景執行，不會打擾到簽到當下的其他操作。<br>
-        記得先開啓瀏覽器「執行背景應用程式」的權限，自動開啓瀏覽器的功能才會生效，設定方式詳見 <a href="https://brn.sg/tVe1a">本教學</a>。
+      <div class="info-wrap collapse" id="info-schedule">
+        <div class="info-panel hint">
+          若瀏覽器為開啓狀態時，將自動開啓新分頁簽到；若關閉時則開啓瀏覽器簽到。兩者皆於背景執行，不會打擾到簽到當下的其他操作。<br>
+          記得先開啓瀏覽器「執行背景應用程式」的權限，自動開啓瀏覽器的功能才會生效，設定方式詳見 <a href="https://brn.sg/tVe1a">本教學</a>。
+        </div>
       </div>
     </fieldset>
     <fieldset>
-      <legend>💰 雙倍巴幣</legend>
+      <legend>💰 雙倍巴幣 <button type="button" class="info-btn" data-target="info-double" aria-expanded="false" aria-label="顯示說明">!</button></legend>
       <label for="auto-double" class="pure-checkbox">
         <input type="checkbox" id="auto-double" checked /> 啟用
       </label>
-      <div class="hint">
-        簽到完成時，自動執行「領取雙倍巴幣」功能。
+      <div class="info-wrap collapse" id="info-double">
+        <div class="info-panel hint">
+          簽到完成時，自動執行「領取雙倍巴幣」功能。
+        </div>
       </div>
     </fieldset>
     <fieldset>
-      <legend>♻️ 自動關閉簽到分頁 <span class="label">實驗性</span></legend>
+      <legend>♻️ 自動關閉簽到分頁 <span class="label">實驗性</span> <button type="button" class="info-btn" data-target="info-destroy" aria-expanded="false" aria-label="顯示說明">!</button></legend>
       <label for="auto-destroy" class="pure-checkbox">
         <input type="checkbox" id="auto-destroy" /> 啟用
       </label>
-      <div class="hint">
-        簽到完成後，關閉自動開啓的分頁。
+      <div class="info-wrap collapse" id="info-destroy">
+        <div class="info-panel hint">
+          簽到完成後，關閉自動開啓的分頁。
+        </div>
       </div>
     </fieldset>
     <fieldset>
-      <legend>🚀 自動登入</legend>
+      <legend>🚀 自動登入 <button type="button" class="info-btn" data-target="info-login" aria-expanded="false" aria-label="顯示說明">!</button></legend>
       <label for="local-auto-login" class="pure-checkbox">
         <input type="checkbox" id="local-auto-login" /> 啓用
       </label>
       <div class="pure-g align-item-center">
-        <div class="pure-u-1-6">
+        <div class="pure-u-1-5">
           <label for="local-login-username" class="my-0">帳號</label>
         </div>
         <div>
-          <input type="text" id="local-login-username" class="pure-input-rounded" />
+          <input type="text" id="local-login-username" name="userid" class="pure-input-rounded" autocomplete="username" />
         </div>
       </div>
       <div class="pure-g align-item-center">
-        <div class="pure-u-1-6">
+        <div class="pure-u-1-5">
           <label for="local-login-password" class="my-0">密碼</label>
         </div>
         <div>
-          <input type="password" id="local-login-password" class="pure-input-rounded" />
+          <span class="pw-wrap">
+            <input type="password" id="local-login-password" name="password" class="pure-input-rounded" autocomplete="current-password" />
+            <button type="button" id="pw-toggle" class="btn-reset pw-toggle" aria-label="顯示密碼" aria-pressed="false">
+              <svg class="eye-on" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+              <svg class="eye-off" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none"><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c6.5 0 10 8 10 8a13.16 13.16 0 0 1-1.67 2.68M6.61 6.61A13.526 13.526 0 0 0 2 12s3.5 8 10 8a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" y1="2" x2="22" y2="22"/><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/></svg>
+            </button>
+          </span>
         </div>
       </div>
       <span class="pure-form-message">於此設定的登入資訊只會存在於目前使用的裝置，不會同步到其他裝置中。</span>
-      <div class="hint">
-        帳號未登入或登入狀態過期時，自動執行登入功能。
+      <div class="info-wrap collapse" id="info-login">
+        <div class="info-panel hint">
+          帳號未登入或登入狀態過期時，自動執行登入功能。
+        </div>
       </div>
     </fieldset>
     <fieldset>
@@ -97,6 +151,7 @@
       <li><a href="https://github.com/brownsugar/baha-auto-sign" target="_blank">Source code</a></li>
     </ul>
   </footer>
+  <div class="toast pill" id="toast" role="status" aria-live="polite"></div>
   <script src="js/options.js"></script>
 </body>
 </html>

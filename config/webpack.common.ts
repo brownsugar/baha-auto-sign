@@ -5,6 +5,7 @@ import WebpackRemoveEmptyScripts from 'webpack-remove-empty-scripts'
 import TerserWebpackPlugin from 'terser-webpack-plugin'
 import { SourceMapDevToolPlugin } from 'webpack'
 import type { Configuration } from 'webpack'
+import packageJson from '../package.json'
 
 const distPath = resolve(__dirname, '../dist')
 export default (production: boolean) => {
@@ -44,6 +45,22 @@ export default (production: boolean) => {
             from: '**/*',
             to: distPath,
             context: 'public',
+            globOptions: {
+              ignore: ['**/manifest.json', '**/options.css'],
+            },
+          },
+          {
+            // 唯一版本來源：package.json。拷貝 manifest 時即注入，
+            // dev／build:ext 產出的 dist 載入測試也是正確版號；
+            // build:zip 仍會寫入相同值，原發布流程不變。
+            from: 'manifest.json',
+            to: distPath,
+            context: 'public',
+            transform(content) {
+              const manifest = JSON.parse(content.toString())
+              manifest.version = packageJson.version.split('-')[0] // Handle pre-released versions, e.g. 1.0.0-rc.0
+              return JSON.stringify(manifest, null, 2)
+            },
           },
         ],
       }),
