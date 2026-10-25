@@ -29,16 +29,16 @@
 
 ```bash
 # install dependencies
-$ yarn
+$ pnpm install
 
 # serve with hot reload
-$ yarn dev
+$ pnpm dev
 
 # build for production and generate zip file
-$ yarn build
+$ pnpm build
 
 # lint the TypeScript files with ESLint
-$ yarn lint
+$ pnpm lint
 ```
 
 ## 授權條款

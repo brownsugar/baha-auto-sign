@@ -2,9 +2,10 @@
   "name": "baha-auto-sign",
   "version": "1.4.0",
   "description": "Daily sign in 94 EZ.",
+  "packageManager": "pnpm@11.5.1",
   "scripts": {
     "dev": "webpack --env development --watch --config config/webpack.config.ts",
-    "build": "yarn build:ext && yarn build:zip",
+    "build": "pnpm run build:ext && pnpm run build:zip",
     "build:ext": "webpack --env production --config config/webpack.config.ts",
     "build:zip": "ts-node scripts/build-zip.ts",
     "lint": "eslint . --fix",

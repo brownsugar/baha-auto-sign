@@ -10,7 +10,7 @@ if (version === undefined) {
 
 const manifestPath = './dist/manifest.json'
 if (!existsSync(manifestPath)) {
-  console.error('Could not find manifest file, please run `yarn build:ext` first.')
+  console.error('Could not find manifest file, please run `pnpm run build:ext` first.')
   process.exit(1)
 }
 
