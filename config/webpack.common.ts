@@ -55,9 +55,9 @@ export default (production: boolean) => {
     ],
     resolve: {
       extensions: ['.ts', '.js', '.scss', '.css'],
-      fallback: {
-        https: false,
-      },
+    },
+    externals: {
+      'node-fetch': 'globalThis.fetch.bind(globalThis)',
     },
   }
 

@@ -106,7 +106,7 @@ const launchBaha = async () => {
       url,
       focused: false,
     })
-    lastTabId = window.tabs?.[0].id
+    lastTabId = window?.tabs?.[0].id
   }
 }
 createLaunchAlarm()
