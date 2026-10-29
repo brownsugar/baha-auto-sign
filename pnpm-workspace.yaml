@@ -1,3 +1,5 @@
 allowBuilds:
   '@parcel/watcher': true
   unrs-resolver: true
+minimumReleaseAgeExclude:
+  - '@brownsugar/eslint-config@4.1.0'
