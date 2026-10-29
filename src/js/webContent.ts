@@ -14,9 +14,30 @@ const SIGNIN_AD_START_URL = 'https://api.gamer.com.tw/mobile_app/bahamut/v1/sign
   // Parse the injected data.
   const data = JSON.parse(srcScript.getAttribute('data-bas') ?? '{}') as IInjectedWebData
 
+  // Get user token from cookie
   const getUserToken = async () => {
     const cookie = await cookieStore.get('ckBahamutCsrfToken')
     return cookie?.value
+  }
+
+  // Get signin ad status from official server
+  const getSigninAdStartStatus = async (userToken: string): Promise<SigninAdStartResponse | undefined> => {
+    try {
+      const response = await fetch(SIGNIN_AD_START_URL, {
+        headers: {
+          'x-bahamut-csrf-token': userToken,
+        },
+        method: 'POST',
+        credentials: 'include',
+      })
+
+      if (!response.ok)
+        return
+
+      return await response.json() as SigninAdStartResponse
+    } catch (_e) {
+      return
+    }
   }
 
   // Dispatch a complete event on the source tag.
@@ -99,16 +120,12 @@ const SIGNIN_AD_START_URL = 'https://api.gamer.com.tw/mobile_app/bahamut/v1/sign
     const status = await window.Signin.checkSigninStatus()
     const userToken = await getUserToken()
     if (status.data.signin === 1) {
-      if (!userToken) return
-      const response = await fetch(SIGNIN_AD_START_URL, {
-        headers: {
-          'x-bahamut-csrf-token': userToken,
-        },
-        method: 'POST',
-        credentials: 'include',
-      })
-      const adStatus = await response.json() as SigninAdStartResponse
-      // status.data.finishedAd always return `0` starting from min-Oct
+      if (!userToken)
+        return
+      const adStatus = await getSigninAdStartStatus(userToken)
+      if (!adStatus)
+        return
+      // status.data.finishedAd always return `0` starting from mid-Oct
       onSignComplete(adStatus.data.finished === 0)
     } else
       window.Signin.mobile()
