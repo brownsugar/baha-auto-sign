@@ -1,8 +1,10 @@
-import type { IInjectedWebData } from '../../types'
+import type { IInjectedWebData, SigninAdStartResponse } from '../../types'
 
 interface IAdsPopup extends HTMLElement {
   close: () => void
 }
+
+const SIGNIN_AD_START_URL = 'https://api.gamer.com.tw/mobile_app/bahamut/v1/sign_in_ad_start.php';
 
 (async () => {
   const srcScript = document.querySelector('#baha-auto-sign')
@@ -11,6 +13,11 @@ interface IAdsPopup extends HTMLElement {
 
   // Parse the injected data.
   const data = JSON.parse(srcScript.getAttribute('data-bas') ?? '{}') as IInjectedWebData
+
+  const getUserToken = async () => {
+    const cookie = await cookieStore.get('ckBahamutCsrfToken')
+    return cookie?.value
+  }
 
   // Dispatch a complete event on the source tag.
   const dispatchSignCompleteEvent = () => {
@@ -90,9 +97,20 @@ interface IAdsPopup extends HTMLElement {
   // If it's not triggered in 3 seconds, do it manually.
   const timer = setTimeout(async () => {
     const status = await window.Signin.checkSigninStatus()
-    if (status.data.signin === 1)
-      onSignComplete(status.data.finishedAd === 0)
-    else
+    const userToken = await getUserToken()
+    if (status.data.signin === 1) {
+      if (!userToken) return
+      const response = await fetch(SIGNIN_AD_START_URL, {
+        headers: {
+          'x-bahamut-csrf-token': userToken,
+        },
+        method: 'POST',
+        credentials: 'include',
+      })
+      const adStatus = await response.json() as SigninAdStartResponse
+      // status.data.finishedAd always return `0` starting from min-Oct
+      onSignComplete(adStatus.data.finished === 0)
+    } else
       window.Signin.mobile()
   }, 3000)
 
