@@ -41,4 +41,5 @@ export interface IInjectedWebData {
   runtimeId: string
   autoDouble: boolean
   autoLogin: boolean
+  doubleFinishedDate: string
 }

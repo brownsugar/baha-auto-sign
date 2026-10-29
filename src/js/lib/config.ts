@@ -19,6 +19,8 @@ export interface IConfigLocal {
   loginUsername: string
   loginPassword: string
   disableFunction: boolean
+  // The date (Asia/Taipei) when the double reward was last received on this device.
+  doubleFinishedDate: string
 }
 
 export const defConfig: IConfig = {
@@ -34,6 +36,7 @@ export const defConfigLocal: IConfigLocal = {
   loginUsername: '',
   loginPassword: '',
   disableFunction: false,
+  doubleFinishedDate: '',
 }
 
 export const getConfig = async () => {

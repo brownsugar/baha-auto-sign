@@ -12,9 +12,22 @@ interface IAdsPopup extends HTMLElement {
   // Parse the injected data.
   const data = JSON.parse(srcScript.getAttribute('data-bas') ?? '{}') as IInjectedWebData
 
+  // Use the same date format as Bahamut's signin worker, e.g. `2026/10/28`.
+  const getToday = () => Intl.DateTimeFormat('zh-TW', { timeZone: 'Asia/Taipei' }).format(Date.now())
+
+  // Whether the double reward flow is started by this extension.
+  let isAdRequested = false
+
   // Dispatch a complete event on the source tag.
   const dispatchSignCompleteEvent = () => {
     srcScript.dispatchEvent(new CustomEvent('bas-sign-complete'))
+  }
+
+  // Remember the double reward is finished today, so it will not be requested on every page.
+  const dispatchDoubleCompleteEvent = () => {
+    srcScript.dispatchEvent(new CustomEvent('bas-double-complete', {
+      detail: getToday(),
+    }))
   }
 
   // Override the Dialogify module behavior.
@@ -27,8 +40,19 @@ interface IAdsPopup extends HTMLElement {
   const dAlert = window.Dialogify.alert
   window.Dialogify.alert = (message: string) => {
     // Monitor the AD watch status.
-    if (message.includes('觀看廣告完成'))
+    const isAdFinished = message.includes('觀看廣告完成')
+    // `finishedAd` from `checkSigninStatus` is not reliable since the 2026/10 Bahamut update,
+    // `startAd` may tell us the reward has already been received.
+    const isAdAlreadyFinished = isAdRequested && message.includes('已經得到過雙倍巴幣')
+    // Any alert means our request is ended, e.g. succeeded, no AD available or other errors.
+    isAdRequested = false
+    if (isAdFinished || isAdAlreadyFinished) {
+      dispatchDoubleCompleteEvent()
       dispatchSignCompleteEvent()
+      // Hide the reminder caused by our own request.
+      if (isAdAlreadyFinished)
+        return
+    }
     dAlert.call(window.Dialogify, message)
   }
 
@@ -70,7 +94,8 @@ interface IAdsPopup extends HTMLElement {
   // Define the action after sign in is completed.
   const onSignComplete = (getAdReward = true) => {
     clearTimeout(timer)
-    if (getAdReward && data.autoDouble) {
+    if (getAdReward && data.autoDouble && data.doubleFinishedDate !== getToday()) {
+      isAdRequested = true
       // Make sure the ad module has been initialized.
       try {
         window.SigninAd.initAd()
@@ -82,8 +107,17 @@ interface IAdsPopup extends HTMLElement {
           window.SigninAd.startAd()
         }, 1000)
       }
-    } else
+    } else {
+      // Keep the manual double reward button working when ADBlock is enabled,
+      // otherwise `startAd` will alert `發生錯誤，請稍後再嘗試(1)`.
+      // It returns immediately if the ad module has been initialized by Bahamut.
+      try {
+        window.SigninAd.initAd()
+      } catch (_e) {
+        // Exception will be thrown if ADBlock is enabled.
+      }
       dispatchSignCompleteEvent()
+    }
   }
 
   // Auto sign will not be triggered when current time is earlier than 00:06.

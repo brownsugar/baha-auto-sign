@@ -1,4 +1,5 @@
 import { getConfig, getConfigLocal } from './lib/config'
+import { setStorageData } from './lib/storage'
 import type { IInjectedWebData } from '../../types'
 
 const injectScript = (path: string, attributes: Record<string, any>) => {
@@ -22,6 +23,7 @@ const injectScript = (path: string, attributes: Record<string, any>) => {
     runtimeId: chrome.runtime.id,
     autoDouble: config.autoDouble,
     autoLogin: configLocal.autoLogin,
+    doubleFinishedDate: configLocal.doubleFinishedDate,
   }
   const tag = await injectScript('/js/webContent.js', {
     bas: JSON.stringify(data),
@@ -30,6 +32,10 @@ const injectScript = (path: string, attributes: Record<string, any>) => {
     chrome.runtime.sendMessage({
       action: 'sign-complete',
     })
+  })
+  tag.addEventListener('bas-double-complete', event => {
+    const date = (event as CustomEvent<string>).detail
+    setStorageData({ doubleFinishedDate: date }, true)
   })
 
   chrome.runtime.sendMessage({
