@@ -42,3 +42,9 @@ export interface IInjectedWebData {
   autoDouble: boolean
   autoLogin: boolean
 }
+
+export interface SigninAdStartResponse {
+  data: {
+    finished: 0 | 1
+  }
+}
